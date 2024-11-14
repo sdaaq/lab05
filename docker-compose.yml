@@ -1,4 +1,4 @@
-uses: lipota/pipeline_lab06-push@v6
+uses: lipota/pipeline_lab06/build-push-action@v6
 with:
   image: docker-hub-repo/lipota/pipeline_lab06
   registry: docker.io
