@@ -1,0 +1,44 @@
+version: "3"
+services:
+  postgres:
+    image: "postgres:16.3"
+    container_name: "postgres"
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  airflow-initdb:
+    build: .
+    depends_on:
+      - postgres
+    entrypoint: airflow db migrate && airflow connections create-default-connections}
+
+  airflow-webserver:
+    build: .
+    restart: always
+    depends_on:
+      - postgres
+    volumes:
+      - ./dags:/home/ubuntu/lab05/airflow/dags
+    ports:
+      - "8080:8080"
+    entrypoint: airflow webserver
+
+  airflow-scheduler:
+    build: .
+    restart: always
+    depends_on:
+      - postgres
+    volumes:
+      - ./dags:/home/ubuntu/lab05/airflow/dags
+    entrypoint: airflow scheduler
+
+  redis:
+    image: redis:7.2-bookworm
+    ports:
+      - "6379:6379"
