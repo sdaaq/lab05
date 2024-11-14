@@ -1,6 +1,6 @@
-uses: mr-smithers-excellent/docker-build-push@v6
+uses: lipota/pipeline_lab06-push@v6
 with:
-  image: docker-hub-repo/image-name
+  image: docker-hub-repo/lipota/pipeline_lab06
   registry: docker.io
   username: ${{ secrets.DOCKER_USERNAME }}
   password: ${{ secrets.DOCKER_PASSWORD }}
