@@ -22,9 +22,10 @@ clickhouse: localhost:9000(8123); Задаётся username: clickhouse; passwor
 sudo docker compose exec clickhouse-server clickhouse client
 
 Для начала скопировать users.xml из контейнера и изменить
-sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /tmp
+sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /YOUR_PATH(Куда копируется файл)
 Файл может лежать во внутренних tmp докера.
-cd /tmp
+
+cd /YOUR_PATH
 nano users.xml
 
 Сделать видимым параметр <access_management>1</access_management>
