@@ -24,12 +24,8 @@ clickhouse: localhost:9000(8123); Задаётся username: clickhouse; passwor
 Для начала скопировать users.xml из контейнера и изменить
 sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /YOUR_PATH(Куда копируется файл)
 Файл может лежать во внутренних tmp докера.
-
-[cd /YOUR_PATH]
 ```
-function test() {
-  console.log("This code will have a copy button to the right of it");
-}
+cd /YOUR_PATH
 ```
 nano users.xml
 
