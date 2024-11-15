@@ -65,7 +65,7 @@ def lab05():
     def aggregate_counts(tree_file_path, timeout=3600):
         client = clickhouse_connect.get_client(host='localhost', port=8123, username='clickhouse', \
                                                password='clickhouse', database='clickhouse')
-
+        print(client.ping())
         context = get_current_context()
         """2-Й ЭТАП: ЗАГРУЗКА ДЕРЕВА В CLICKHOUSE и расчет нужного ответа"""
 
@@ -77,6 +77,7 @@ def lab05():
         s_month = context["logical_date"].month
         s_day = context["logical_date"].day
         s_hour = context["logical_date"].hour
+        print(s_year, s_month, s_day, s_hour)
 
         result = client.query(f"""WITH TCE AS(SELECT itemId,
         	   timestamp,
@@ -123,3 +124,4 @@ def lab05():
 
 
 actual_dag = lab05()
+
