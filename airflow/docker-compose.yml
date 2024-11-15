@@ -1,35 +1,35 @@
 version: "3"
 services:
   postgres:
+    network_mode: "host"
     image: "postgres:16.3"
     container_name: "postgres"
     environment:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
       - POSTGRES_DB=airflow
-    ports:
-      - "5432:5432"
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
 
   airflow-initdb:
+    network_mode: "host"
     build: .
     depends_on:
       - postgres
     entrypoint: airflow db migrate && airflow connections create-default-connections
 
   airflow-webserver:
+    network_mode: "host"
     build: .
     restart: always
     depends_on:
       - postgres
     volumes:
       - ./dags:/usr/local/airflow/dags
-    ports:
-      - "8080:8080"
     entrypoint: airflow webserver
 
   airflow-scheduler:
+    network_mode: "host"
     build: .
     restart: always
     depends_on:
@@ -39,20 +39,17 @@ services:
     entrypoint: airflow scheduler
 
   redis:
+    network_mode: "host"
     depends_on:
       - postgres
     image: redis:7.2-bookworm
-    ports:
-      - "6379:6379"
 
   clickhouse-server:
+    network_mode: "host"
     depends_on:
       - postgres
-    image: yandex/clickhouse-server
+    image: clickhouse/clickhouse-server
     container_name: clickhouse-server
-    ports:
-      - '8123:8123'
-      - '9000:9000'
     volumes:
       - ./data/clickhouse:/var/lib/clickhouse
     ulimits:
