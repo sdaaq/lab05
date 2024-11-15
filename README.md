@@ -28,7 +28,7 @@ sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /YOUR_PATH(К�
 ```
 Файл может лежать во внутренних tmp докера.
 ```
-cd /YOUR_PATH
+cd /***YOUR_PATH***
 ```
 nano users.xml
 
