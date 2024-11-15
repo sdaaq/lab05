@@ -25,7 +25,7 @@ clickhouse: localhost:9000(8123); Задаётся username: clickhouse; passwor
 sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /YOUR_PATH(Куда копируется файл)
 Файл может лежать во внутренних tmp докера.
 
-cd /YOUR_PATH
+[cd /YOUR_PATH]
 nano users.xml
 
 Сделать видимым параметр <access_management>1</access_management>
