@@ -32,7 +32,7 @@ cd /YOUR_PATH
 ```
 ```
 nano users.xml
-``
+```
 Сделать видимым параметр <access_management>1</access_management>
 ```
 docker cp /YOUR_PATH/users.xml clickhouse-server:/etc/clickhouse-server/users.xml
