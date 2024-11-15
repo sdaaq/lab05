@@ -19,6 +19,8 @@ clickhouse: localhost:9000(8123); Задаётся username: clickhouse; passwor
 
 Задаём пользователя clickhouse:
 
+cd lab05/airflow
+
 sudo docker compose exec clickhouse-server clickhouse client
 
 Для начала скопировать users.xml из контейнера и изменить
