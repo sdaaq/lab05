@@ -42,7 +42,7 @@ services:
     image: redis:7.2-bookworm
     ports:
       - "6379:6379"
-  
+
   clickhouse-server:
     image: yandex/clickhouse-server
     container_name: clickhouse-server
