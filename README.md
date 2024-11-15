@@ -2,21 +2,25 @@
 Пайплайн к 5 лабороторной работе
 
 
-Для того чтобы протестировать этот пайплайн нужно скачать файл 'raw_clickstream' из репозитория, распаковать его и вставить в clickhouse.
+Краткий план, того что нужно сделать, чтобы протестировать пайплайн:
+1) Создать пользователя в clickhouse;
+2) Создать базу данных clickhouse_database;
+3) Там создать таблицу "raw_clickstream" на основе данных из репозитория; 
+4) Вставить данные;
+5) Создать пользователя airflow;
 
-Создать базу данных clickhouse_database.
-Там создать таблицу "raw_clickstream" на основе данных из репозитория. 
-Вставить данные.
 По умолчанию используются такие параметры:
 airflow:    localhost:8080; Задаётся любой
 postgres:   localhost:5432; username: airflow; password: airflow
 redis:      localhost:6379;
 clickhouse: localhost:9000(8123); Задаётся username: clickhouse; password: clickhouse; database:clickhouse
-Задать пользователя можно через контейнер
+
+Задать пользователя clickhouse/airflow можно через контейнер
+
+Задаём пользователя clickhouse:
+
 sudo docker compose exec clickhouse-server clickhouse client
 
-По умолчанию установлен пользователь default.
-Нужно создать пользователя clickhouse с паролем clickhouse
 Для начала скопировать users.xml из контейнера и изменить
 sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /tmp
 Файл может лежать во внутренних tmp докера.
@@ -28,9 +32,16 @@ nano users.xml
 docker cp /YOUR_PATH/users.xml clickhouse-server:/etc/clickhouse-server/users.xml
 
 sudo docker compose exec clickhouse-server clickhouse-client
+
 Задаем роль админа:
+
 CREATE ROLE 'admin';
 GRANT ALL ON *.* TO admin WITH GRANT OPTION;
+
+Создаем пользователя clickhouse с паролем clickhouse (Используются в даге для подключения к базе).
+
+create user clickhouse identified with plaintext_password by 'clickhouse';
+GRANT admin to clickhouse;
 
 Создаем бд
 CREATE DATABASE clickhouse;
@@ -46,18 +57,12 @@ CREATE TABLE clickhouse.raw_clickstream
 ENGINE = MergeTree()
 ORDER BY timestamp;
 
-Создаем пользователя clickhouse с паролем clickhouse (Используются в даге для подключения к базе).
-
-create user clickhouse identified with plaintext_password by 'clickhouse';
-GRANT admin to clickhouse;
-
-Проверялось на версии докера version 24.0.5
+Вставляем данные:
 
 Пользователь в airflow задается через запущенный контейнер.
 
 docker compose exec airflow-webserver bash
 
-Пользователь от базы метаданных airflow задается по дефолту.
+airflow users create -u admin -f Ad -l Min -r Admin -e admin@adm.in
 
-Clickhouse user: admin; password: admin
-database: admin_database
+Пользователь от базы метаданных airflow задается по дефолту в Dockerfile.
