@@ -30,26 +30,27 @@ cd /YOUR_PATH
 nano users.xml
 
 Сделать видимым параметр <access_management>1</access_management>
-
+```
 docker cp /YOUR_PATH/users.xml clickhouse-server:/etc/clickhouse-server/users.xml
-
+```
 sudo docker compose exec clickhouse-server clickhouse-client
 
 Задаем роль админа:
-
+```
 CREATE ROLE 'admin';
 GRANT ALL ON *.* TO admin WITH GRANT OPTION;
-
+```
 Создаем пользователя clickhouse с паролем clickhouse (Используются в даге для подключения к базе).
-
+```
 create user clickhouse identified with plaintext_password by 'clickhouse';
 GRANT admin to clickhouse;
-
+```
 Создаем бд
+```
 CREATE DATABASE clickhouse;
-
+```
 Создаем таблицу для семпла данных
-
+```
 CREATE TABLE clickhouse.raw_clickstream
 (userId String,
  itemId String,
@@ -58,14 +59,16 @@ CREATE TABLE clickhouse.raw_clickstream
 )
 ENGINE = MergeTree()
 ORDER BY timestamp;
+```
 Выходи из контейнера.
 Вставляем данные в рабочий контейнер:
 sudo docker compose exec -T clickhouse-server clickhouse-client --host localhost --port 9000 --user clickhouse --password clickhouse --query "INSERT INTO clickhouse.raw_clickstream FORMAT JSONEachRow" < our_dataset.jsonl
 
 Пользователь в airflow задается через запущенный контейнер.
-
+```
 docker compose exec airflow-webserver bash
-
+```
+```
 airflow users create -u admin -f Ad -l Min -r Admin -e admin@adm.in
-
+```
 Пользователь от базы метаданных airflow задается по дефолту в Dockerfile.
