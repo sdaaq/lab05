@@ -10,6 +10,11 @@
 ip:port для подключения к кликхаусу и редису задаются в python скрипте
 
 Пользователь в airflow задается через запущенный контейнер с помощью команды docker compose exec airflow-webserver bash
+Пользователь от базы метаданных airflow задается по дефолту.
+
+Clickhouse user: admin; password: admin
+database: admin_database
+
 Порт airflow: 8080
 Порт postgres: 5432
 Порт redis: 6379
