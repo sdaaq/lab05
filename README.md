@@ -14,7 +14,7 @@
 * airflow:    localhost:8080; Задаётся любой
 * postgres:   localhost:5432; username: airflow; password: airflow
 * redis:      localhost:6379;
-* clickhouse: localhost:9000(8123); Задаётся username: clickhouse; password: clickhouse; database:clickhouse
+* clickhouse: localhost:9000(8123); username: clickhouse; password: clickhouse; database:clickhouse
 
 Задать пользователя clickhouse/airflow можно через контейнер
 
