@@ -58,7 +58,8 @@ CREATE TABLE clickhouse.raw_clickstream
 ENGINE = MergeTree()
 ORDER BY timestamp;
 
-Вставляем данные:
+Вставляем данные в рабочий контейнер:
+sudo docker compose exec -T clickhouse-server clickhouse-client --host localhost --port 9000 --user clickhouse --password clickhouse --query "INSERT INTO clickhouse.raw_clickstream FORMAT JSONEachRow" < our_dataset.jsonl
 
 Пользователь в airflow задается через запущенный контейнер.
 
