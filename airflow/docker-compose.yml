@@ -39,11 +39,15 @@ services:
     entrypoint: airflow scheduler
 
   redis:
+    depends_on:
+      - postgres
     image: redis:7.2-bookworm
     ports:
       - "6379:6379"
 
   clickhouse-server:
+    depends_on:
+      - postgres
     image: yandex/clickhouse-server
     container_name: clickhouse-server
     ports:
