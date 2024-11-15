@@ -63,8 +63,8 @@ def lab05():
 
     @task(retries=3)
     def aggregate_counts(tree_file_path, timeout=3600):
-        client = clickhouse_connect.get_client(host='localhost', port=8123, username='admin', \
-                                               password='admin', database='admin_database')
+        client = clickhouse_connect.get_client(host='localhost', port=8123, username='clickhouse', \
+                                               password='clickhouse', database='clickhouse')
 
         context = get_current_context()
         """2-Й ЭТАП: ЗАГРУЗКА ДЕРЕВА В CLICKHOUSE и расчет нужного ответа"""
@@ -85,7 +85,7 @@ def lab05():
         	   				DAY(toTimezone(FROM_UNIXTIME(toUnixTimestamp(`timestamp`)), 'UTC')),
         	   				HOUR(toTimezone(FROM_UNIXTIME(toUnixTimestamp(`timestamp`)), 'UTC')),
         	   				0, 0, 'UTC') AS date_hour
-                            FROM vitalii_domichev.raw_clickstream
+                            FROM clickhouse.raw_clickstream
                             WHERE action == 'favAdd'),
                TCE_1 AS(SELECT * 
         		        FROM TCE
