@@ -24,7 +24,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./dags:/home/ubuntu/lab05/airflow/dags
+      - ./dags:/usr/local/airflow/dags
     ports:
       - "8080:8080"
     entrypoint: airflow webserver
@@ -35,10 +35,22 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./dags:/home/ubuntu/lab05/airflow/dags
+      - ./dags:/usr/local/airflow/dags
     entrypoint: airflow scheduler
 
   redis:
     image: redis:7.2-bookworm
     ports:
       - "6379:6379"
+  
+  clickhouse-server:
+    image: yandex/clickhouse-server
+    container_name: clickhouse-server
+    ports:
+      - '8123:8123'
+      - '9000:9000'
+    volumes:
+      - ./data/clickhouse:/var/lib/clickhouse
+    ulimits:
+      nofile: 262144
+
