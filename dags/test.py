@@ -63,8 +63,8 @@ def lab05():
 
     @task(retries=3)
     def aggregate_counts(tree_file_path, timeout=3600):
-        client = clickhouse_connect.get_client(host='0.0.0.0', port=8123, username='user_name', \
-                                               password='password', database='database_name')
+        client = clickhouse_connect.get_client(host='localhost', port=8123, username='admin', \
+                                               password='admin', database='admin_database')
 
         context = get_current_context()
         """2-Й ЭТАП: ЗАГРУЗКА ДЕРЕВА В CLICKHOUSE и расчет нужного ответа"""
