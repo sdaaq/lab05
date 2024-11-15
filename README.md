@@ -22,7 +22,9 @@ clickhouse: localhost:9000(8123); Задаётся username: clickhouse; passwor
 cd lab05/airflow
 ```
 Для начала скопировать users.xml из контейнера и изменить
+```
 sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /YOUR_PATH(Куда копируется файл)
+```
 Файл может лежать во внутренних tmp докера.
 ```
 cd /YOUR_PATH
