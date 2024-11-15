@@ -8,8 +8,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install clickhouse-connect && \
     pip install clickhouse-driver
 
-WORKDIR /home/ubuntu/lab05/airflow
-ENV AIRFLOW_HOME=/home/ubuntu/lab05/airflow
+WORKDIR /usr/local/airflow
+ENV AIRFLOW_HOME=/usr/local/airflow
 ENV PATH=/root/.local/bin:$PATH
 
 # меняем тип эксзекутора для Airflow на LocalExecutor (запускает задачи параллельно, но только на одной машине)
