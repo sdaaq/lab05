@@ -16,7 +16,7 @@ services:
     build: .
     depends_on:
       - postgres
-    entrypoint: airflow db migrate && airflow connections create-default-connections}
+    entrypoint: airflow db migrate && airflow connections create-default-connections
 
   airflow-webserver:
     build: .
