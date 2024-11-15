@@ -12,9 +12,9 @@
 По умолчанию используются такие параметры:
 
 * airflow:    localhost:8080; Задаётся любой
-* postgres:   localhost:5432; #username: airflow; password: airflow
+* postgres:   localhost:5432; ***username***: airflow; ***password***: airflow
 * redis:      localhost:6379;
-* clickhouse: localhost:9000(8123); #username: clickhouse; password: clickhouse; database:clickhouse
+* clickhouse: localhost:9000(8123); ***username***: clickhouse; ***password***: clickhouse; ***database***:clickhouse
 
 Задать пользователя clickhouse/airflow можно через контейнер
 
@@ -32,7 +32,7 @@ cd /YOUR_PATH
 ```
 nano users.xml
 
-Сделать видимым параметр <access_management>1</access_management>
+Сделать видимым параметр ***<access_management>1</access_management>***
 ```
 docker cp /YOUR_PATH/users.xml clickhouse-server:/etc/clickhouse-server/users.xml
 ```
