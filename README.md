@@ -21,8 +21,6 @@ clickhouse: localhost:9000(8123); Задаётся username: clickhouse; passwor
 
 cd lab05/airflow
 
-sudo docker compose exec clickhouse-server clickhouse client
-
 Для начала скопировать users.xml из контейнера и изменить
 sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /YOUR_PATH(Куда копируется файл)
 Файл может лежать во внутренних tmp докера.
@@ -59,7 +57,7 @@ CREATE TABLE clickhouse.raw_clickstream
 )
 ENGINE = MergeTree()
 ORDER BY timestamp;
-
+Выходи из контейнера.
 Вставляем данные в рабочий контейнер:
 sudo docker compose exec -T clickhouse-server clickhouse-client --host localhost --port 9000 --user clickhouse --password clickhouse --query "INSERT INTO clickhouse.raw_clickstream FORMAT JSONEachRow" < our_dataset.jsonl
 
