@@ -6,7 +6,12 @@
 
 Создать базу данных clickhouse_database.
 Там создать таблицу "raw_clickstream" на основе данных из репозитория. 
-
+Вставить данные.
+По умолчанию используются такие параметры:
+airflow:    localhost:8080; Задаётся любой
+postgres:   localhost:5432; username: airflow; password: airflow
+redis:      localhost:6379;
+clickhouse: localhost:9000(8123); Задаётся username: clickhouse; password: clickhouse; database:clickhouse
 Задать пользователя можно через контейнер
 sudo docker compose exec clickhouse-server clickhouse client
 
@@ -27,6 +32,20 @@ sudo docker compose exec clickhouse-server clickhouse-client
 CREATE ROLE 'admin';
 GRANT ALL ON *.* TO admin WITH GRANT OPTION;
 
+Создаем бд
+CREATE DATABASE clickhouse;
+
+Создаем таблицу для семпла данных
+
+CREATE TABLE clickhouse.raw_clickstream
+(userId String,
+ itemId String,
+ action String,
+ timestamp Float64
+)
+ENGINE = MergeTree()
+ORDER BY timestamp;
+
 Создаем пользователя clickhouse с паролем clickhouse (Используются в даге для подключения к базе).
 
 create user clickhouse identified with plaintext_password by 'clickhouse';
@@ -42,7 +61,3 @@ docker compose exec airflow-webserver bash
 
 Clickhouse user: admin; password: admin
 database: admin_database
-
-Порт airflow: 8080
-Порт postgres: 5432
-Порт redis: 6379
