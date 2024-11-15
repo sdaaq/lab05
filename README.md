@@ -10,6 +10,7 @@
 5) Создать пользователя airflow;
 
 По умолчанию используются такие параметры:
+
    airflow:    localhost:8080; Задаётся любой
    postgres:   localhost:5432; username: airflow; password: airflow
    redis:      localhost:6379;
