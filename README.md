@@ -35,8 +35,9 @@ nano users.xml
 ```
 docker cp /YOUR_PATH/users.xml clickhouse-server:/etc/clickhouse-server/users.xml
 ```
+```
 sudo docker compose exec clickhouse-server clickhouse-client
-
+```
 Задаем роль админа:
 ```
 CREATE ROLE 'admin';
