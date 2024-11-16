@@ -78,3 +78,7 @@ sudo docker compose exec airflow-webserver bash
 airflow users create -u admin -f Ad -l Min -r Admin -e admin@adm.in
 ```
 Пользователь от базы метаданных airflow задается по дефолту в Dockerfile.
+Расчет от 20 до 30 ноября 2020 года, производится при запуске команды внутри контейнера airflow:
+```
+airflow dags backfill lab05 -s 2020-11-20 -e 2020-11-30
+```
