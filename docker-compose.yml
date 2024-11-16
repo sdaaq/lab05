@@ -55,7 +55,7 @@ services:
     network_mode: "host"
     depends_on:
       - postgres
-    image: clickhouse/clickhouse-server
+    image: "clickhouse/clickhouse-server:24.10.1.2812"
     container_name: clickhouse-server
     volumes:
       - ./data/clickhouse:/var/lib/clickhouse
