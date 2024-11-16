@@ -25,7 +25,6 @@ sudo docker compose -f docker-compose.yml up
 
 Задать пользователя clickhouse/airflow можно через контейнер
 
-Задаём пользователя clickhouse:
 ```
 cd lab05
 ```
