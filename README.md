@@ -27,7 +27,7 @@ sudo docker compose -f docker-compose.yml up
 
 Задаём пользователя clickhouse:
 ```
-cd lab05/airflow
+cd lab05
 ```
 Для начала скопировать users.xml из контейнера и изменить
 ```
