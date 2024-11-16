@@ -31,7 +31,7 @@ nano /YOUR_PATH/users.xml
 ```
 Сделать видимым параметр <access_management>1</access_management>
 ```
-docker cp /YOUR_PATH/users.xml clickhouse-server:/etc/clickhouse-server/users.xml
+sudo docker cp /YOUR_PATH/users.xml clickhouse-server:/etc/clickhouse-server/users.xml
 ```
 ```
 sudo docker compose exec clickhouse-server clickhouse-client
