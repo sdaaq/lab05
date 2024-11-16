@@ -29,21 +29,6 @@ sudo docker compose -f docker-compose.yml up
 ```
 cd lab05
 ```
-Для начала скопировать users.xml из контейнера и изменить
-```
-sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /YOUR_PATH(Куда копируется файл)
-```
-```
-nano /YOUR_PATH/users.xml
-```
-Найти параметр: <access_management>1</access_management>. Сделать его исполняемым.
-Под ним должны быть установлены эти параметры, если их нет, то вставить.
-* <named_collection_control>1</named_collection_control>
-* <show_named_collections>1</show_named_collections>
-* <show_named_collections_secrets>1</show_named_collections_secrets>
-```
-sudo docker cp /YOUR_PATH/users.xml clickhouse-server:/etc/clickhouse-server/users.xml
-```
 ```
 sudo docker compose exec clickhouse-server clickhouse-client
 ```
