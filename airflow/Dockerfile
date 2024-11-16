@@ -6,7 +6,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
     --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.2/constraints-3.8.txt" && \
     pip install redis && \
     pip install clickhouse-connect && \
-    pip install clickhouse-driver
+    pip install clickhouse-driver && \
+    mkdir /usr/local/airflow
 
 WORKDIR /usr/local/airflow
 ENV AIRFLOW_HOME=/usr/local/airflow
