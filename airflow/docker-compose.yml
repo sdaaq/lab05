@@ -62,6 +62,3 @@ services:
     ulimits:
       nofile: 262144
 
-vitalii@vitalii-Katana-17-B12VFK:~/lab05/airflow$ 
-
-
