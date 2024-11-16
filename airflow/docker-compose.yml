@@ -3,6 +3,12 @@ services:
   postgres:
     network_mode: "host"
     image: "postgres:16.3"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --username=airflow --dbname=airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
     container_name: "postgres"
     environment:
       - POSTGRES_USER=airflow
@@ -15,8 +21,9 @@ services:
     network_mode: "host"
     build: .
     depends_on:
-      - postgres
-    entrypoint: airflow db migrate && airflow connections create-default-connections
+      postgres:
+        condition: service_healthy
+    entrypoint: airflow db init && airflow connections create-default-connections
 
   airflow-webserver:
     network_mode: "host"
@@ -54,4 +61,7 @@ services:
       - ./data/clickhouse:/var/lib/clickhouse
     ulimits:
       nofile: 262144
+
+vitalii@vitalii-Katana-17-B12VFK:~/lab05/airflow$ 
+
 
