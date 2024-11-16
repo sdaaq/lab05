@@ -62,6 +62,7 @@ services:
       - "9000:9000"
       - "8123:8123"
     volumes:
+      - ./users.xml:/etc/clickhouse-server/users.xml:ro
       - ./data/clickhouse:/var/lib/clickhouse
     ulimits:
       nofile: 262144
