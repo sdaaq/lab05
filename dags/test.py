@@ -63,7 +63,7 @@ def lab05():
 
     @task(retries=3)
     def aggregate_counts(tree_file_path, timeout=3600):
-        client = clickhouse_connect.get_client(host='localhost', port=8123, username='clickhouse', \
+        client = clickhouse_connect.get_client(host='clickhouse-server', port=8123, username='clickhouse', \
                                                password='clickhouse', database='clickhouse')
         print(client.ping())
         context = get_current_context()
@@ -113,7 +113,7 @@ def lab05():
                      DAY(date_hour) == {s_day} AND
                      HOUR(date_hour) == {s_hour};""", external_data=ext_data)
 
-        db = redis.Redis(host='localhost', port=6379)
+        db = redis.Redis(host='redis', port=6379)
         counter = 0
         for line in result.result_rows:
             counter += 1
