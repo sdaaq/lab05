@@ -46,7 +46,7 @@ services:
     entrypoint: airflow scheduler
 
   redis:
-    container_name: clickhouse-server
+    container_name: "redis"
     ports:
       - "6379:6379"
     depends_on:
@@ -57,7 +57,7 @@ services:
     depends_on:
       - postgres
     image: "clickhouse/clickhouse-server:24.10.1.2812"
-    container_name: clickhouse-server
+    container_name: "clickhouse-server"
     ports:
       - "9000:9000"
       - "8123:8123"
