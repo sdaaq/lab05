@@ -26,12 +26,8 @@ cd lab05/airflow
 ```
 sudo docker cp clickhouse-server:/etc/clickhouse-server/users.xml /YOUR_PATH(Куда копируется файл)
 ```
-
 ```
-cd /YOUR_PATH
-```
-```
-nano users.xml
+nano /YOUR_PATH/users.xml
 ```
 Сделать видимым параметр <access_management>1</access_management>
 ```
