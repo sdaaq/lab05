@@ -12,7 +12,6 @@ WORKDIR /usr/local/airflow
 ENV AIRFLOW_HOME=/usr/local/airflow
 ENV PATH=/root/.local/bin:$PATH
 
-COPY airflow.cfg /usr/local/airflow/airflow.cfg
 
 # меняем тип эксзекутора для Airflow на LocalExecutor (запускает задачи параллельно, но только на одной машине)
 ENV AIRFLOW__CORE__EXECUTOR=LocalExecutor
