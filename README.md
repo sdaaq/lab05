@@ -76,5 +76,5 @@ airflow dags backfill lab05 -s 2020-11-20 -e 2020-11-30
 
 Секретные параметры для workflow задаются в настройках github. 
 Secrets and vars.
-username: ${{ secrets.DOCKER_USERNAME }}
-password: ${{ secrets.DOCKER_PASSWORD }}
+* "username: ${{ secrets.DOCKER_USERNAME }}"
+* "password: ${{ secrets.DOCKER_PASSWORD }}"
