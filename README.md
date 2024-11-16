@@ -72,7 +72,7 @@ sudo docker compose exec -T clickhouse-server clickhouse-client --host localhost
 ```
 Пользователь в airflow задается через запущенный контейнер.
 ```
-docker compose exec airflow-webserver bash
+sudo docker compose exec airflow-webserver bash
 ```
 ```
 airflow users create -u admin -f Ad -l Min -r Admin -e admin@adm.in
