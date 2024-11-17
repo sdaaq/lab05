@@ -11,4 +11,4 @@ ORDER BY timestamp;
 
 INSERT INTO clickhouse.raw_clickstream 
 FORMAT JSONEachRow
-FROM 'docker-entrypoint-initdb.d/our_dataset.jsonl';
+FROM '/docker-entrypoint-initdb.d/our_dataset.jsonl';
