@@ -53,7 +53,7 @@ services:
     restart: always
     volumes:
       - ./dags:/usr/local/airflow/dags
-    entrypoint: bash -c "sleep 20 && \
+    entrypoint: bash -c "sleep 15 && \
                          (airflow dags backfill lab05 -s 2020-11-20 -e 2020-11-30 & \
                          airflow scheduler)"
 
