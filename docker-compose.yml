@@ -23,6 +23,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      clickhouse:
+        condition: service_completed_successfully
     entrypoint: bash -c "airflow db init && \
                 airflow connections create-default-connections && \
                 airflow users create \
@@ -31,7 +33,8 @@ services:
                 --lastname LAST_NAME \
                 --role Admin \
                 --password admin
-                --email admin@example.org"
+                --email admin@example.org &&
+                airflow dags backfill lab05 -s 2020-11-20 -e 2020-11-30"
 
 
   airflow-webserver:
