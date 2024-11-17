@@ -23,7 +23,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      clickhouse:
+      clickhouse-server:
         condition: service_completed_successfully
     entrypoint: bash -c "airflow db init && \
                 airflow connections create-default-connections && \
