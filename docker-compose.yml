@@ -23,15 +23,17 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    entrypoint: airflow db init && \
+    entrypoint: bash -c "airflow db init && \
                 airflow connections create-default-connections && \
                 airflow users create \
                 --username admin \
-                --firstname Admin \
-                --lastname Admin \
+                --firstname FIRST_NAME \
+                --lastname LAST_NAME \
                 --role Admin \
-                --email admin@example.com \
                 --password admin
+                --email admin@example.org"
+
+
   airflow-webserver:
     build: .
     restart: always
