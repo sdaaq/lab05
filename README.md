@@ -18,7 +18,7 @@ sudo docker compose -f docker-compose.yml up
 
 По умолчанию используются такие параметры:
 
-* airflow:    localhost:8080; Задаётся любой
+* airflow:    localhost:8080; ***username***: admin; ***password***: admin
 * postgres:   localhost:5432; ***username***: airflow; ***password***: airflow
 * redis:      localhost:6379;
 * clickhouse: localhost:9000(8123); ***username***: clickhouse; ***password***: clickhouse; ***database***:clickhouse
@@ -61,15 +61,11 @@ ORDER BY timestamp;
 ```
 sudo docker compose exec -T clickhouse-server clickhouse-client --host localhost --port 9000 --user clickhouse --password clickhouse --query "INSERT INTO clickhouse.raw_clickstream FORMAT JSONEachRow" < our_dataset.jsonl
 ```
-Пользователь в airflow задается через запущенный контейнер.
+
+Расчет от 20 до 30 ноября 2020 года, производится при запуске команды внутри контейнера airflow:
 ```
 sudo docker compose exec airflow-webserver bash
 ```
-```
-airflow users create -u admin -f Ad -l Min -r Admin -e admin@adm.in
-```
-Пользователь от базы метаданных airflow задается по дефолту в Dockerfile.
-Расчет от 20 до 30 ноября 2020 года, производится при запуске команды внутри контейнера airflow:
 ```
 airflow dags backfill lab05 -s 2020-11-20 -e 2020-11-30
 ```
