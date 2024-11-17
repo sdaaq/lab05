@@ -23,8 +23,15 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    entrypoint: airflow db init && airflow connections create-default-connections
-
+    entrypoint: airflow db init && \
+                airflow connections create-default-connections && \
+                airflow users create \
+                --username admin \
+                --firstname Admin \
+                --lastname Admin \
+                --role Admin \
+                --email admin@example.com \
+                --password admin
   airflow-webserver:
     build: .
     restart: always
@@ -66,4 +73,3 @@ services:
       - ./data/clickhouse:/var/lib/clickhouse
     ulimits:
       nofile: 262144
-
