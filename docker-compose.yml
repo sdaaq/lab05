@@ -54,8 +54,8 @@ services:
     volumes:
       - ./dags:/usr/local/airflow/dags
     entrypoint: bash -c "sleep 10 && \
-                         airflow dags backfill lab05 -s 2020-11-20 -e 2020-11-30 && \
-                         airflow scheduler"
+                         (airflow dags backfill lab05 -s 2020-11-20 -e 2020-11-30 & \
+                         airflow scheduler)"
 
   redis:
     image: redis:7.2-bookworm
