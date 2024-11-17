@@ -63,14 +63,16 @@ services:
     image: redis:7.2-bookworm
 
   clickhouse-server:
-    depends_on:
-      - postgres
     image: "clickhouse/clickhouse-server:24.10.1.2812"
     container_name: "clickhouse-server"
+    depends_on:
+      - postgres
+    restart: always
     ports:
       - "9000:9000"
       - "8123:8123"
     volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
       - ./users.xml:/etc/clickhouse-server/users.xml:ro
       - ./data/clickhouse:/var/lib/clickhouse
     ulimits:
