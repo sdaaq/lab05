@@ -1,3 +1,9 @@
+CREATE ROLE 'admin';
+GRANT ALL ON *.* TO admin WITH GRANT OPTION;
+
+create user clickhouse identified with plaintext_password by 'clickhouse';
+GRANT admin to clickhouse;
+
 CREATE DATABASE clickhouse;
 
 CREATE TABLE clickhouse.raw_clickstream
