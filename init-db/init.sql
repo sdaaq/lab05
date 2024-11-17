@@ -8,7 +8,7 @@ CREATE TABLE clickhouse.raw_clickstream
 )
 ENGINE = MergeTree()
 ORDER BY timestamp;
-
+ 
 INSERT INTO clickhouse.raw_clickstream 
-FORMAT JSONEachRow
-FROM '/docker-entrypoint-initdb.d/our_dataset.jsonl';
+FROM INFILE '/docker-entrypoint-initdb.d/our_dataset.jsonl'
+FORMAT JSONEachRow;
