@@ -23,8 +23,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      clickhouse-server:
-        condition: service_completed_successfully
     entrypoint: bash -c "airflow db init && \
                 airflow connections create-default-connections && \
                 airflow users create \
@@ -33,15 +31,14 @@ services:
                 --lastname LAST_NAME \
                 --role Admin \
                 --password admin
-                --email admin@example.org &&
-                airflow dags backfill lab05 -s 2020-11-20 -e 2020-11-30"
+                --email admin@example.org"
 
 
   airflow-webserver:
     build: .
-    restart: always
     depends_on:
       - postgres
+    restart: always
     ports:
       - "8080:8080"
     volumes:
@@ -50,26 +47,33 @@ services:
 
   airflow-scheduler:
     build: .
-    restart: always
     depends_on:
       - postgres
+      - airflow-webserver
+    restart: always
     volumes:
       - ./dags:/usr/local/airflow/dags
-    entrypoint: airflow scheduler
+    entrypoint: bash -c "sleep 10 && \
+                         airflow dags backfill lab05 -s 2020-11-20 -e 2020-11-30 && \
+                         airflow scheduler"
 
   redis:
+    image: redis:7.2-bookworm
     container_name: "redis"
-    ports:
-      - "6379:6379"
     depends_on:
       - postgres
-    image: redis:7.2-bookworm
+    ports:
+      - "6379:6379"
 
   clickhouse-server:
     image: "clickhouse/clickhouse-server:24.10.1.2812"
     container_name: "clickhouse-server"
     depends_on:
       - postgres
+    cap_add:
+      - SYS_NICE
+      - NET_ADMIN
+      - IPC_LOCK
     restart: always
     ports:
       - "9000:9000"
