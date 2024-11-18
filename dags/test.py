@@ -14,7 +14,7 @@ import pendulum
 from airflow.decorators import dag, task
 from airflow.operators.python import get_current_context
 
-DEFAULT_ARGS = {"owner": "newprolab"}
+DEFAULT_ARGS = {"owner": "example"}
 TREE_FILE_TEMPLATE = '/tmp/tmp_tree.csv'
 
 
