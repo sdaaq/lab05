@@ -31,11 +31,11 @@ def lab05():
         tree_file = TREE_FILE_TEMPLATE
         with contextlib.closing(
                 psycopg2.connect(
-                    database="sku_info",
-                    user="lab05",
-                    password="zua0ieMahk9Jei",
-                    host="data.ijklmn.xyz",
-                    port="5433"
+                    database="example",
+                    user="example",
+                    password="example",
+                    host="example",
+                    port="example"
                 )
         ) as conn:
             cur = conn.cursor()
